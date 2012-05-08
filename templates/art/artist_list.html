@@ -1,0 +1,16 @@
+{% extends "art/__base.html" %}
+
+{% load url from future %}
+
+{% block content %}
+	<h1>Artists</h1>
+	
+	<ul>
+		{% for artist in artist_list %}
+			<li><a href="{% url "art.views.artist_detail" artist.username %}">{{ artist.first_name }} {{ artist.last_name }} ({{ artist.username }})</a></li>
+		{% empty %}
+			<li>No artists.</li>
+		{% endfor %}
+	</ul>
+	
+{% endblock %}
