@@ -1,29 +1,51 @@
-{% extends "art/__base.html" %}
+{% extends "artsy/__base.html" %}
 
 {% load url from future %}
 
 {% block title %}{{ artist.first_name }} {{ artist.last_name }} - {{ block.super }}{% endblock %}
 
 {% block content %}
-	<h1>{{ artist.first_name }} {{ artist.last_name }} ({{ artist.username }})</h1>
-	
-	<h2>Original Artwork</h2>
-	
-	<ul>
-		{% for artwork in artist.artwork_owned.all %}
-			<li><a href="{% url "art.views.artwork_detail" artwork.slug %}">{{ artwork.title }}</a></li>
-		{% empty %}
-			<li>No artworks.</li>
-		{% endfor %}
+	<ul class="breadcrumb">
+		<li>
+			<a href="/">Home</a> <span class="divider"> > </span>
+		</li>
+		<li>
+			<a href="/artists/">Artists</a> <span class="divider"> > </span>
+		</li>
+		<li>
+			<a class="active" href="#"> {{ artist.username }} </a>
+		</li>
 	</ul>
-	
-	<h2>Artwork Contributions</h2>
-	
-	<ul>
-		{% for artwork in artist.artwork_contributed.all %}
-			<li><a href="{% url "art.views.artwork_detail" artwork.slug %}">{{ artwork.title }}</a></li>
-		{% empty %}
-			<li>No artworks.</li>
-		{% endfor %}
-	</ul>
+	<h1>{{ artist.username }} <small>{{ artist.first_name }} {{ artist.last_name }}</small></h1>
+	<div class="span8">
+		<h2>Profile</h2>
+		<ul class="unstyled">
+			<li>
+				<strong>Year: </strong> {{ artist.year }}
+			</li>
+			<li>
+				<strong>Favorite Artists: </strong> {{ artist.favorite_artists }}
+			</li>
+		</ul>
+		
+		<h2>Original Artwork</h2>
+		
+		<ul>
+			{% for artwork in artist.artwork_owned.all %}
+				<li><a href="{% url "artsy.views.artwork_detail" artwork.slug %}">{{ artwork.title }}</a></li>
+			{% empty %}
+				<li>No artworks.</li>
+			{% endfor %}
+		</ul>
+		
+		<h2>Artwork Contributions</h2>
+		
+		<ul>
+			{% for artwork in artist.artwork_contributed.all %}
+				<li><a href="{% url "artsy.views.artwork_detail" artwork.slug %}">{{ artwork.title }}</a></li>
+			{% empty %}
+				<li>No artworks.</li>
+			{% endfor %}
+		</ul>
+	</div>
 {% endblock %}
