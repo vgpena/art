@@ -24,29 +24,34 @@
 				<strong>Year: </strong> {{ artist.year }}
 			</li>
 			<li>
+				<strong>Hometown: </strong> {{ artist.hometown }}
+			</li>
+			<li>
 				<strong>Favorite Artists: </strong> {{ artist.favorite_artists }}
 			</li>
 		</ul>
 		
+		<div class="row">
+			<h2>Original Artwork</h2>
+			
+			<ul class="unstyled">
+				{% for artwork in artist.artwork_owned.all %}
+					<li class="span2"><a href="/artwork/{{ artwork.title }}"><img src="{{ artwork.artwork.url }}" width="200"></a></li>
+				{% empty %}
+					<li>This user hasn't submitted anything yet :(</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class="row">
+		<h2>Collaborations</h2>
 		
-		<h2>Original Artwork</h2>
-		
-		<ul>
-			{% for artwork in artist.artwork_owned.all %}
-				<li><a href="{% url "artsy.views.artwork_detail" artwork.slug %}">{{ artwork.title }}</a></li>
-			{% empty %}
-				<li>No artworks.</li>
-			{% endfor %}
-		</ul>
-		
-		<h2>Artwork Contributions</h2>
-		
-		<ul>
+		<ul class="unstyled">
 			{% for artwork in artist.artwork_contributed.all %}
 				<li><a href="{% url "artsy.views.artwork_detail" artwork.slug %}">{{ artwork.title }}</a></li>
 			{% empty %}
-				<li>No artworks.</li>
+				<li>This user hasn't done any collaborations yet :(</li>
 			{% endfor %}
 		</ul>
+		</div>
 	</div>
 {% endblock %}

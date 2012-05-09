@@ -25,8 +25,7 @@
 		<tr>
 			<td>
 				<a href="{% url "artsy.views.artist_detail" artist.username %}"> {{ artist.username }}</a>
-				{% if user.is_staff%} {% comment %} for some reason it looks like everyone is considered an admin...? {% endcomment %}
-					**
+				{% if artist.is_staff %}**
 				{% endif %}
 			</td>
 			<td>

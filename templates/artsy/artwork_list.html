@@ -3,14 +3,15 @@
 {% load url from future %}
 
 {% block content %}
-<h2>Latest Artwork <small>past 7 days</small></h2>
+<h2>Latest Uploads</h2>
 <table>
 	{% for artwork in latest %}
 		<tr>
 			<td><a href="/artwork/{{ artwork.title }}"><img src="{{ artwork.artwork.url }}" width="200"></a></td>
 			<td><a href="/artwork/{{ artwork.title }}"><h3>{{ artwork.title}}</h3></a>
 			by <a href="/artist/{{ artwork.original_artist.username }}">{{ artwork.original_artist.username }}</a><br />
-			uploaded on {{ artwork.date_Uploaded.date }}</td>
+			uploaded on {{ artwork.date_Uploaded.date }}<br />
+			this piece is <strong>{% if artwork.is_open %}open{% else %} not open {% endif %}</strong></td>
 		</tr>
 	{% endfor %}
 </table>
