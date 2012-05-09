@@ -1,4 +1,5 @@
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
+from django.shortcuts import render_to_response
 from artsy.models import Artist, Artwork
 
 
@@ -15,8 +16,11 @@ class ArtistListView(ListView):
 
 class ArtworkDetailView(DetailView):
 	model = Artwork
-
+	
+class IndexView(TemplateView):
+	template_name = 'artsy/index.html'
 
 artist_detail = ArtistDetailView.as_view()
 artist_list = ArtistListView.as_view()
 artwork_detail = ArtworkDetailView.as_view()
+index = IndexView.as_view()
