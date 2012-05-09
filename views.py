@@ -1,5 +1,5 @@
 from django.views.generic import DetailView, ListView
-from art.models import Artist, Artwork
+from artsy.models import Artist, Artwork
 
 
 class ArtistDetailView(DetailView):

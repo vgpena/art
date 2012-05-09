@@ -1,4 +1,4 @@
-from art.models import Artist, Artwork
+from artsy.models import Artist, Artwork
 from django.contrib import admin
 
 admin.site.register(Artist)

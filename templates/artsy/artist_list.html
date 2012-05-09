@@ -1,0 +1,48 @@
+{% extends "artsy/__base.html" %}
+
+{% load url from future %}
+
+{% block content %}
+	<h2>Artists</h2>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>
+					Username
+				</th>
+				<th>
+					Name
+				</th>
+				<th>
+					Last Login
+				</th>
+				<th>
+					Member Since
+				</th>
+			</tr>
+		</thead>
+		{% for artist in artist_list %}
+		<tr>
+			<td>
+				<a href="{% url "artsy.views.artist_detail" artist.username %}"> {{ artist.username }}</a>
+				{% if user.is_staff%} {% comment %} for some reason it looks like everyone is considered an admin...? {% endcomment %}
+					**
+				{% endif %}
+			</td>
+			<td>
+				{{ artist.first_name }} {{ artist.last_name }}
+			</td>
+			<td>
+				{{ artist.last_login.date }}
+			</td>
+			<td>
+				{{ artist.date_joined.date }}
+			</td>
+		</tr>
+		{% empty %}
+		<tr>
+			No artists. <a href="/signup">Sign the f*** up!</a>
+		</tr>
+		{% endfor %}
+	</table>
+{% endblock %}
