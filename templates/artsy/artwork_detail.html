@@ -1,11 +1,30 @@
-{% extends "art/__base.html" %}
+{% extends "artsy/__base.html" %}
 
 {% load url from future %}
 
 {% block title %}{{ artwork.title }} - {{ block.super }}{% endblock %}
 
 {% block content %}
+	<ul class="breadcrumb">
+		<li>
+			<a href="/">Home</a> <span class="divider"> > </span>
+		</li>
+		<li>
+			<a href="/artists/">Artists</a> <span class="divider"> > </span>
+		</li>
+		<li>
+			<a href="/artist/{{ artwork.original_artist.username }}"> {{ artwork.original_artist.username }} </a> <span class="divider"> > </span>
+		</li>
+		<li>
+			<a class="active" href="#"> {{ artwork.title }}</a>
+		</li>
+	</ul>
+	
 	<h1>{{ artwork.title }}</h1>
-	<p>by <a href="{% url "art.views.artist_detail" artwork.original_artist.username %}">{{ artwork.original_artist.first_name }} {{ artwork.original_artist.last_name }} ({{ artwork.original_artist.username }})</p>
+	<p>by <a href="{% url "artsy.views.artist_detail" artwork.original_artist.username %}">{{ artwork.original_artist.username }} ({{ artwork.original_artist.first_name }} {{ artwork.original_artist.last_name }})</a></p>
 	<img src="{{ artwork.artwork.url }}" />
+	<br /><br />
+	<p><strong>Description</strong><br />
+	{{ artwork.description }}
+	</p>
 {% endblock %}
