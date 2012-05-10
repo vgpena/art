@@ -32,12 +32,12 @@ class Artist(User):
 		
 class Artwork(models.Model):
 	title = models.CharField(max_length = 30, null = False, blank=False)
-	slug = models.SlugField(max_length = 30)
+	slug = models.SlugField(max_length = 30, )
 	#height = models.IntegerField() 
   	#width = models.IntegerField()
+  	original_artist = models.ForeignKey(User, related_name = 'artwork_owned')
 	artwork = models.ImageField(upload_to="art/")
 	is_open = models.BooleanField()
-	original_artist = models.ForeignKey(User, related_name = 'artwork_owned')
 	other_artists = models.ManyToManyField(User, null = True, blank=True, related_name='artwork_contributed')
 	date_Uploaded = models.DateTimeField(auto_now_add = True)
 	date_Modified = models.DateTimeField(auto_now = True)
@@ -45,4 +45,4 @@ class Artwork(models.Model):
 	
 	
 	def __unicode__(self):
-		return self.slug
+		return (self.original_artist.username+"-"+self.slug)
