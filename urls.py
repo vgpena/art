@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 	url(r'^artists/$', 'artsy.views.artist_list'),
 	url(r'^artist/(?P<username>[-\.\w]+)/$', 'artsy.views.artist_detail'),
-	url(r'^artwork/(?P<slug>[-\w]+)/$', 'artsy.views.artwork_detail'),
+	url(r'^artwork/(?P<username>/?P<slug>[-\w]+)/$', 'artsy.views.artwork_detail'),
 	#url(r'^artwork/$', date_based.archive_index, artwork_info),
 	url(r'^artwork/$', 'django.views.generic.date_based.archive_index', 
   {

@@ -6,5 +6,4 @@ class ArtworkAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Artist)
-#admin.site.register(Artwork)
 admin.site.register(Artwork, ArtworkAdmin)

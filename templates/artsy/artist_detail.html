@@ -36,7 +36,7 @@
 			
 			<ul class="unstyled">
 				{% for artwork in artist.artwork_owned.all %}
-					<li class="span2"><a href="/artwork/{{ artwork.title }}"><img src="{{ artwork.artwork.url }}" width="200"></a></li>
+					<li class="span2"><a href="/artwork/{{ artwork }}"><img src="{{ artwork.artwork.url }}" width="200"></a></li>
 				{% empty %}
 					<li>This user hasn't submitted anything yet :(</li>
 				{% endfor %}
